@@ -6,11 +6,14 @@ import PetSimulation from './components/PetSimulation/PetSimulation';
 const App = () => {
   const [grassItems, setGrassItems] = useState([
     { id: 'grass-1', type: 'grass' },
-    { id: 'grass-2', type: 'grass' },
-    { id: 'grass-3', type: 'grass' },
+    // { id: 'grass-2', type: 'grass' },
+    // { id: 'grass-3', type: 'grass' },
   ]);
 
-  const [fedGrass, setFedGrass] = useState([]);
+  const [fedGrass] = useState([]);
+  const [feedingGrass, setFeedingGrass] = useState(null);
+  const [isEating, setIsEating] = useState(false);
+  const [showHappy, setShowHappy] = useState(false);
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
@@ -21,10 +24,19 @@ const App = () => {
     if (over.id === 'rabbit-area') {
       const grassItem = grassItems.find(item => item.id === active.id);
       if (grassItem) {
-        // 从草区域移除
-        setGrassItems(prev => prev.filter(item => item.id !== active.id));
-        // 添加到已喂食的草列表
-        setFedGrass(prev => [...prev, grassItem]);
+        // 开始喂食动画
+        setFeedingGrass(grassItem);
+        setIsEating(true);
+        setShowHappy(true);
+        
+        // 0.5秒后恢复
+        setTimeout(() => {
+          setFeedingGrass(null);
+          setIsEating(false);
+          setShowHappy(false);
+          // 草回到原位置
+          setGrassItems(prev => [...prev, grassItem]);
+        }, 500);
       }
     }
   };
@@ -33,7 +45,13 @@ const App = () => {
     <div>
       <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
         <SortableContext items={grassItems.map(item => item.id)} strategy={verticalListSortingStrategy}>
-          <PetSimulation grassItems={grassItems} fedGrass={fedGrass} />
+          <PetSimulation 
+            grassItems={grassItems} 
+            fedGrass={fedGrass}
+            feedingGrass={feedingGrass}
+            isEating={isEating}
+            showHappy={showHappy}
+          />
         </SortableContext>
       </DndContext>
     </div>

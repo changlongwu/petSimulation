@@ -1,12 +1,13 @@
 .pet-simulation {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 20px;
   min-height: 400px;
   background: linear-gradient(to bottom, #87CEEB, #98FB98);
   border-radius: 15px;
   margin: 20px;
+  position: relative;
 }
 
 .grass-area {
@@ -17,6 +18,10 @@
   background: rgba(255, 255, 255, 0.3);
   border-radius: 10px;
   min-width: 150px;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .grass {
@@ -59,6 +64,10 @@
   min-height: 200px;
   border: 3px dashed transparent;
   transition: all 0.3s ease;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .rabbit-area.over {
@@ -108,3 +117,46 @@
     transform: scale(1);
   }
 } 
+.rabbit-image{
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.happy {
+  position: absolute;
+  top: -30px;
+  right: -20px;
+  font-size: 2rem;
+  animation: bounce 0.5s ease-in-out;
+}
+
+.feeding-grass {
+  position: absolute;
+  top: 50%;
+  right: -30px;
+  transform: translateY(-50%);
+  animation: feeding 6s ease-in-out;
+}
+
+@keyframes feeding {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+.happy-rabbit-image{
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
