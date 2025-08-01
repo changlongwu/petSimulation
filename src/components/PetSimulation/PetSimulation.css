@@ -1,0 +1,110 @@
+.pet-simulation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  min-height: 400px;
+  background: linear-gradient(to bottom, #87CEEB, #98FB98);
+  border-radius: 15px;
+  margin: 20px;
+}
+
+.grass-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  min-width: 150px;
+}
+
+.grass {
+  cursor: grab;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grass-image {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.grass:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.grass:active {
+  cursor: grabbing;
+}
+
+.rabbit-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  min-width: 200px;
+  min-height: 200px;
+  border: 3px dashed transparent;
+  transition: all 0.3s ease;
+}
+
+.rabbit-area.over {
+  border-color: #4CAF50;
+  background: rgba(76, 175, 80, 0.2);
+}
+
+.rabbit {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.fed-grass {
+  margin: 5px;
+  animation: fadeIn 0.5s ease-in;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fed-grass .grass-image {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+} 
