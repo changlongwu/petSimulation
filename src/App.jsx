@@ -20,23 +20,26 @@ const App = () => {
     
     if (!over) return;
 
-    // 如果拖拽到兔子区域
-    if (over.id === 'rabbit-area') {
+    // 如果拖拽到兔子图片
+    if (over.id === 'rabbit-image') {
       const grassItem = grassItems.find(item => item.id === active.id);
       if (grassItem) {
+        // 从草区域移除草
+        setGrassItems(prev => prev.filter(item => item.id !== active.id));
+        
         // 开始喂食动画
         setFeedingGrass(grassItem);
         setIsEating(true);
         setShowHappy(true);
         
-        // 0.5秒后恢复
+        // 6秒后恢复
         setTimeout(() => {
           setFeedingGrass(null);
           setIsEating(false);
           setShowHappy(false);
           // 草回到原位置
           setGrassItems(prev => [...prev, grassItem]);
-        }, 500);
+        }, 6000);
       }
     }
   };

@@ -7,61 +7,42 @@ import rabbitImage from '../../assets/images/rabbit.png';
 import rabbitEatingImage from '../../assets/images/rabbit-eating.png';
 import happyRabbitImage from '../../assets/images/happy.png';
 import './PetSimulation.css';
+import DraggableGrass from './Grass';
 
-// 可拖拽的草组件
-const DraggableGrass = ({ id }) => {
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
-  
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
 
-  return (
-    <div 
-      className="grass" 
-      ref={setNodeRef} 
-      style={style} 
-      {...attributes} 
-      {...listeners}
-    >
-      <img src={grassImage} alt="grass" className="grass-image" />
-    </div>
-  );
-};
 
-// 不可拖拽的兔子组件
-const Rabbit = ({ isEating, showHappy }) => {
-  return (
-    <div className="rabbit">
-      <img 
-        src={isEating ? rabbitEatingImage : rabbitImage} 
-        alt="rabbit" 
-        className="rabbit-image" 
-      />
-      
-      {showHappy && <img src={happyRabbitImage} alt="happy-rabbit" className="happy-rabbit-image" />}
-    </div>
-  );
-};
 
-// 兔子区域（可接收拖拽的草）
-const RabbitArea = ({ children, isEating, showHappy, feedingGrass }) => {
+// 可接收拖拽的兔子组件
+const Rabbit = ({ isEating, showHappy, feedingGrass }) => {
   const { setNodeRef, isOver } = useDroppable({
-    id: 'rabbit-area',
+    id: 'rabbit-image',
   });
 
   return (
-    <div 
-      ref={setNodeRef} 
-      className={`rabbit-area ${isOver ? 'over' : ''}`}
-    >
-      <Rabbit isEating={isEating} showHappy={showHappy} />
+    <div className="rabbit">
+      <img 
+        ref={setNodeRef}
+        src={isEating ? rabbitEatingImage : rabbitImage} 
+        alt="rabbit" 
+        className={`rabbit-image ${isOver ? 'over' : ''}`}
+      />
+      
+      {showHappy && <img src={happyRabbitImage} alt="happy-rabbit" className="happy-rabbit-image" />}
+      
       {feedingGrass && (
         <div className="feeding-grass">
           <img src={grassImage} alt="grass" className="grass-image" />
         </div>
       )}
+    </div>
+  );
+};
+
+// 兔子区域
+const RabbitArea = ({ children, isEating, showHappy, feedingGrass }) => {
+  return (
+    <div className="rabbit-area">
+      <Rabbit isEating={isEating} showHappy={showHappy} feedingGrass={feedingGrass} />
       {children}
     </div>
   );

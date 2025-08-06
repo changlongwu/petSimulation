@@ -1,0 +1,21 @@
+.grass-image{
+    width: 100px;
+    height: 100px;
+    /* object-fit: contain; */
+}
+
+
+.grass {
+    cursor: grab;
+    padding: 10px;
+    background: none;
+    border: none !important;
+    border-radius: 1px;
+    text-align: center;
+    /* transition: all 0.3s ease; */
+    user-select: none;
+    width: 100px;
+    height:200px;
+    position: relative;
+    left: 20px;
+  }

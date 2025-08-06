@@ -11,42 +11,24 @@
 }
 
 .grass-area {
-  display: flex;
-  flex-direction: column;
+
   gap: 10px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.3);
+  /* background: rgba(255, 255, 255, 0.3); */
   border-radius: 10px;
   min-width: 150px;
   position: absolute;
-  left: 20px;
+  left: 60px;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.grass {
-  cursor: grab;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
-  text-align: center;
-  transition: all 0.3s ease;
-  user-select: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.grass-image {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-}
 
-.grass:hover {
+/* .grass:hover {
   transform: scale(1.1);
   background: rgba(255, 255, 255, 0.8);
-}
+} */
 
 .grass:active {
   cursor: grabbing;
@@ -133,11 +115,12 @@
 }
 
 .feeding-grass {
-  position: absolute;
+  position: fixed;
   top: 50%;
-  right: -30px;
+  left: calc(50% - 65px);
   transform: translateY(-50%);
   animation: feeding 6s ease-in-out;
+  z-index: 1000;
 }
 
 @keyframes feeding {
@@ -145,7 +128,7 @@
     opacity: 0;
     transform: translateY(-50%) scale(0.5);
   }
-  50% {
+  20% {
     opacity: 1;
     transform: translateY(-50%) scale(1.2);
   }
@@ -156,7 +139,12 @@
 }
 
 .happy-rabbit-image{
-  width: 100px;
-  height: 100px;
+  position: fixed;
+  top: calc(50% - 120px);
+  left: calc(50% + 10px);
+  transform: translateX(-50%);
+  width: 65px;
+  height: 65px;
   object-fit: contain;
+  z-index: 1001;
 }
